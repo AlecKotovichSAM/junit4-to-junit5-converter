@@ -27,20 +27,18 @@ public class ConverterTest {
     public void testFileConvert() throws IOException, URISyntaxException {
         Converter converter = new Converter();
         String junit4ConvertedContent = converter.convertFileContent(
-                new File(getClass().getClassLoader().getResource("com/aleck/JUnit4Sample.java").toURI()).getAbsolutePath());
-        
+                new File(getClass().getClassLoader().getResource("com/aleck/JUnit4SampleTest.java").toURI()).getAbsolutePath());
+
         ClassLoader classLoader = getClass().getClassLoader();
-        File file = new File(classLoader.getResource("com/aleck/JUnit4Sample.java").getFile());
+        File file = new File(classLoader.getResource("com/aleck/JUnit4SampleTest.java").getFile());
         int pos = file.getAbsolutePath().indexOf("target");
         assertTrue(pos != -1);
-        
-        String samplePath = new StringBuilder(file.getAbsolutePath().substring(0, pos))
-                .append("src/test/java/com/aleck/JUnit4Sample.java")
+
+        String samplePath = new StringBuilder(file.getAbsolutePath().substring(0, pos)).append("src/test/java/com/aleck/JUnit4SampleTest.java")
                 .toString();
-                
 
         String jUnit5SampleContent = Files.readString(Paths.get(samplePath), StandardCharsets.UTF_8);
 
-        assertEquals(junit4ConvertedContent, jUnit5SampleContent);
+        assertEquals(jUnit5SampleContent, junit4ConvertedContent);
     }
 }

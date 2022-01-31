@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.aleck.converter;
 
 import java.util.function.Function;
@@ -38,13 +35,6 @@ public class Replacer implements Function<String, String> {
                     }
                 }
             }
-        }
-        
-        
-        // @Test(expected = ...
-        if (line.indexOf("@Test") != -1 && line.indexOf("(expected") != -1) {
-            line = line.replace("(expected", "//expected"); // comment out
-            counter.set(counter.get() + 1);
         }
         
         return line;

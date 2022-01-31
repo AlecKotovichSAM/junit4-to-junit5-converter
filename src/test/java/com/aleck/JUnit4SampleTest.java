@@ -24,8 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class JUnit4Sample {
+public class JUnit4SampleTest {
 
     @Autowired
     private TestComponent testComponent;
@@ -44,15 +43,26 @@ public class JUnit4Sample {
     }
 
     @Test
-    @Disabled
     public void test2() {
-
-    }
-
-    @Test//expected = NullPointerException.class)
-    public void test3() {
+      org.junit.jupiter.api.Assertions.assertThrows(ArithmeticException.class, () -> {
         int i = 1 / 0;
+      });
     }
+
+    @Test
+    @Disabled
+    public void test3() {
+
+    }
+
+    @Test
+    public void test4() {
+      org.junit.jupiter.api.Assertions.assertThrows(NullPointerException.class, () -> {
+        String s = null;
+        s.substring(0, 5);
+      });
+    }
+
 }
 
 @Component

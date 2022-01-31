@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.aleck;
 
 import java.io.File;

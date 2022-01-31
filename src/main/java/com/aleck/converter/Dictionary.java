@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.aleck.converter;
 
 import java.util.Collections;
