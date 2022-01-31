@@ -17,7 +17,7 @@ java -jar ./target/junit4-to-junit5-converter-0.1.jar <path_to_your_file_or_fold
 ```
 
 ## Program arguments
-| Argument        | Value             |
+| Argument        | Description       |
 | --------------- |:-----------------:|
 | /path/to/your/file/or/folder        |
 | r        | Scan a folder recursively|
