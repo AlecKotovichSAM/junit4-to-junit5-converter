@@ -28,15 +28,7 @@ jobs:
       - name: Build with Maven
         run: mvn -s nexus-settings.xml clean deploy --batch-mode  
         env:
-          GITHUB_ACTOR: ${{ secrets.CR_USERNAME }}
-          GITHUB_TOKEN: ${{ secrets.CR_TOKEN }}
-          DB_USER: ${{ secrets.DB_USER }}
-          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-          DB_NAME: ${{ secrets.DB_NAME }}
-          DB_HOST: ${{ secrets.DB_HOST }}
-          DB_PORT: ${{ secrets.DB_PORT }}
-          MAVEN_USERNAME: ${{ secrets.CR_USERNAME }}
-          MAVEN_PASSWORD: ${{ secrets.CR_TOKEN }}          
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Log into registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
