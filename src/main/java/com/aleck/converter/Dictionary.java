@@ -30,12 +30,27 @@ public class Dictionary {
             put("import static org.junit.Assert.assertTrue;", "import static org.junit.jupiter.api.Assertions.assertTrue;");
             put("import static org.junit.Assert.assertFalse;", "import static org.junit.jupiter.api.Assertions.assertFalse;");
             
-
+            put("import org.mockito.runners.MockitoJUnitRunner;", "import org.mockito.junit.jupiter.MockitoExtension;" 
+                                                                  + System.lineSeparator()
+                                                                  + "import org.mockito.junit.jupiter.MockitoSettings;"
+                                                                  + System.lineSeparator()
+                                                                  + "import org.mockito.quality.Strictness;");
+            
+            put("import static org.mockito.Matchers.any;", "import static org.mockito.Mockito.any;"); 
+            put("import static org.mockito.Matchers.anyString;", "import static org.mockito.Mockito.anyString;");
+            put("import static org.mockito.Matchers.anyInt;", "import static org.mockito.Mockito.anyInt;");
+            put("import static org.mockito.Matchers.anyLong;", "import static org.mockito.Mockito.anyLong;");
+            put("import static org.mockito.Matchers.eq;", "import static org.mockito.Mockito.eq;");
+            put("import static org.mockito.Matchers.anyListOf;", "import static org.mockito.Mockito.anyList;");
+            
+            
             put("import org.springframework.test.context.junit4.SpringRunner;",
                     "import org.springframework.test.context.junit.jupiter.SpringExtension;");
             //put("@RunWith(SpringRunner.class)", "@ExtendWith(SpringExtension.class)");
             put("@RunWith(SpringRunner.class)", "");
-            put("@RunWith(MockitoJUnitRunner.class)", "@ExtendWith(MockitoExtension.class)");
+            put("@RunWith(MockitoJUnitRunner.class)", "@ExtendWith(MockitoExtension.class)"
+                                                      + System.lineSeparator()
+                                                      + "@MockitoSettings(strictness = Strictness.LENIENT)");
             put("@Before", "@BeforeEach");
             put("@After", "@AfterEach");
             put("@BeforeClass", "@BeforeAll");
@@ -45,6 +60,9 @@ public class Dictionary {
             put("Assert.assertNotNull", "Assertions.assertNotNull");
             put("Assert.assertEquals", "Assertions.assertEquals");
             put("Assert.fail", "Assertions.fail");
+            put("Assert.assertTrue", "Assertions.assertTrue");
+            
+            put("anyListOf(", "anyList(/* TODO remove argument manually! */"); // TODO
             
         }
     });

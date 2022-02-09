@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Consumer;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -68,8 +69,12 @@ public class Converter implements Consumer<String> {
         try (Stream<String> stream = Files.lines(path, StandardCharsets.UTF_8)) {
 
             // Do the replace operation
-            List<String> lines = stream.map(REPLACER).collect(Collectors.toList());
+            List<String> lines = stream
+                    .map(REPLACER)
+                    .flatMap(Pattern.compile(System.lineSeparator())::splitAsStream)
+                    .collect(Collectors.toList());
 
+            // Process @Test(expected = ..) blocks
             String output = processTestExpectedExceptionsWithJavaParser(lines);
 
             if (REPLACER.getCounter().get() > 0) {

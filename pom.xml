@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.aleck</groupId>
 	<artifactId>junit4-to-junit5-converter</artifactId>
-	<version>0.1</version>
+	<version>0.1.1</version>
 
 	<properties>
 		<maven.compiler.source>11</maven.compiler.source>
@@ -53,6 +53,13 @@
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-api</artifactId>
 			<version>5.8.2</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-junit-jupiter</artifactId>
+			<version>4.0.0</version>
 			<scope>test</scope>
 		</dependency>
 

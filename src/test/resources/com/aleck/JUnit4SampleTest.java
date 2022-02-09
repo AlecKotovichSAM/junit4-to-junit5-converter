@@ -1,29 +1,20 @@
 package com.aleck;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.stereotype.Component;
-import org.springframework.test.context.junit4.SpringRunner;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
-@RunWith(SpringRunner.class)
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@RunWith(MockitoJUnitRunner.class)
 public class JUnit4SampleTest {
 
     @Autowired
@@ -31,15 +22,17 @@ public class JUnit4SampleTest {
 
     @Before
     public void setUp() {
+        assertEquals("A", "A");
     }
 
     @After
     public void tearDown() {
+        assertNotNull(Integer.MAX_VALUE);
     }
 
     @Test
     public void test1() {
-
+        assertNull(null);
     }
 
     @Test(expected = ArithmeticException.class)
@@ -50,7 +43,7 @@ public class JUnit4SampleTest {
     @Test
     @Ignore
     public void test3() {
-
+        assertTrue(Boolean.TRUE);
     }
 
     @Test(expected = NullPointerException.class)
