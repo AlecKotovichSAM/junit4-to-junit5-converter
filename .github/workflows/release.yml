@@ -1,0 +1,68 @@
+name: Java CI with Maven and Docker
+
+on:
+  push:
+    branches:
+      - release
+
+env:
+  REGISTRY_NAME: ghcr.io
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+      - name: Cache Maven packages
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-maven
+
+      - name: Build with Maven
+        run: mvn clean deploy --batch-mode  
+        env:
+          GITHUB_ACTOR: ${{ secrets.CR_USERNAME }}
+          GITHUB_TOKEN: ${{ secrets.CR_TOKEN }}
+          DB_USER: ${{ secrets.DB_USER }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          DB_NAME: ${{ secrets.DB_NAME }}
+          DB_HOST: ${{ secrets.DB_HOST }}
+          DB_PORT: ${{ secrets.DB_PORT }}
+          MAVEN_USERNAME: ${{ secrets.CR_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.CR_TOKEN }}          
+
+      - name: Log into registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+        
+      - name: Set Release version env variable
+        run: |
+          echo "RELEASE_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_ENV
+          
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ env.RELEASE_VERSION }}
+          release_name: Release ${{ env.RELEASE_VERSION }}
+          draft: false
+          prerelease: false
+
+      - name: Docker build
+        run: |
+          DOCKER_IMAGE_PREFIX_LOWER=$(echo $DOCKER_IMAGE_PREFIX | awk '{print tolower($0)}')
+          mvn dockerfile:build dockerfile:push -Ddocker.image.tag=${{ env.RELEASE_VERSION }} -Ddocker.image.prefix=$DOCKER_IMAGE_PREFIX_LOWER
+        env:
+          DOCKER_IMAGE_PREFIX: ${{ env.REGISTRY_NAME }}/${{ github.repository }}
+          GITHUB_ACTOR: ${{ secrets.CR_USERNAME }}
+          GITHUB_TOKEN: ${{ secrets.CR_TOKEN }}
+
