@@ -5,14 +5,14 @@ Simple line-to-line text converter. Does not update Maven pom.xml or Gradle buil
 ## Usage
 
 ```
-mvn clean package
-java -jar ./target/junit4-to-junit5-converter-0.1.jar
+mvn clean package shade:shade
+java -jar ./target/junit4-to-junit5-converter-0.1.4.jar
 
 Usage: 1st argument must be file or directory.
 2nd can be 'r' to enable scanning a directory recursively (optional).
 Quitting.
 
-java -jar ./target/junit4-to-junit5-converter-0.1.jar <path_to_your_file_or_folder> <r (optional)>
+java -jar ./target/junit4-to-junit5-converter-0.1.4.jar <path_to_your_file_or_folder> <r (optional)>
 
 ```
 

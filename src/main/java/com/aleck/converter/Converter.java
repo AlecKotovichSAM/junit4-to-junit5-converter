@@ -11,6 +11,9 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.Duration;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
@@ -59,7 +62,7 @@ public class Converter implements Consumer<String> {
 
         ParseResult<CompilationUnit> parseResult = validateFile(sourceFilePath);
         if (!parseResult.isSuccessful()) {
-            log.error("File " + sourceFilePath + " cannot be parsed!");
+            log.warn("File " + sourceFilePath + " cannot be parsed, maybe it is not a valid Java file...");
             return;
         }
 
@@ -104,6 +107,7 @@ public class Converter implements Consumer<String> {
     }
 
     public void convertDirectory(String sourceDirPath, boolean recursive) throws IOException {
+    	LocalTime startTime = LocalTime.now();
         Path dirPath = Paths.get(sourceDirPath);
         List<String> files = null;
 
@@ -123,6 +127,8 @@ public class Converter implements Consumer<String> {
 
         log.info("Total occurences: " + occurences);
         log.info("Total files analyzed:" + files.size());
+        Duration between = Duration.between(startTime, LocalTime.now());
+		log.info("Total execution time: " + DateTimeFormatter.ISO_LOCAL_TIME.format(LocalTime.ofSecondOfDay(between.toSeconds())));
 
     }
 

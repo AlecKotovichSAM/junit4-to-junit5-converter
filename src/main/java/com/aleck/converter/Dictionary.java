@@ -23,12 +23,17 @@ public class Dictionary {
             put("import org.junit.Assume;", "import org.junit.jupiter.api.Assertions;");
             
             put("import org.junit.Assert.*;", "import org.junit.jupiter.api.Assertions.*;");
+            put("import static org.junit.Assert.*;", "import static org.junit.jupiter.api.Assertions.*;");
             put("import static org.junit.Assert.assertEquals;", "import static org.junit.jupiter.api.Assertions.assertEquals;");
             put("import static org.junit.Assert.assertNotEquals;", "import static org.junit.jupiter.api.Assertions.assertNotEquals;");
             put("import static org.junit.Assert.assertNotNull;", "import static org.junit.jupiter.api.Assertions.assertNotNull;");
             put("import static org.junit.Assert.assertNull;", "import static org.junit.jupiter.api.Assertions.assertNull;");
             put("import static org.junit.Assert.assertTrue;", "import static org.junit.jupiter.api.Assertions.assertTrue;");
             put("import static org.junit.Assert.assertFalse;", "import static org.junit.jupiter.api.Assertions.assertFalse;");
+            
+            put("import static org.junit.Assert.assertThat;", "import static org.hamcrest.MatcherAssert.assertThat;");
+            
+            put("import static org.junit.Assertions.fail;", "import static org.junit.jupiter.api.Assertions.fail;");
             
             put("import org.mockito.runners.MockitoJUnitRunner;", "import org.mockito.junit.jupiter.MockitoExtension;" 
                                                                   + System.lineSeparator()
@@ -61,8 +66,10 @@ public class Dictionary {
             put("Assert.assertEquals", "Assertions.assertEquals");
             put("Assert.fail", "Assertions.fail");
             put("Assert.assertTrue", "Assertions.assertTrue");
-            
-            put("anyListOf(", "anyList(/* TODO remove argument manually! */"); // TODO
+          
+            // 
+            put("anyListOf(", "anyList(/* TODO remove argument manually! */"); // TODO #9
+            put("assertThat(", "org.hamcrest.MatcherAssert.assertThat("); // TODO #10
             
         }
     });
