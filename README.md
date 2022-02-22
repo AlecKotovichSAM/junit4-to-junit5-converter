@@ -1,6 +1,6 @@
 # junit4-to-junit5-converter
 
-Simple line-to-line text converter
+Simple line-to-line text converter. Does not update Maven or Gradle junit dependency version (change to JUnit 5 by yourself)
 
 ## Usage
 
