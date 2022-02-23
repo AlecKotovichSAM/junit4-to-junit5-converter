@@ -12,6 +12,8 @@ import com.aleck.converter.Converter;
 public class Main {
 
 	/**
+	 * Main entry point
+	 * 
 	 * @param args
 	 * @throws IOException
 	 */
@@ -32,6 +34,7 @@ public class Main {
 				recursive = true;
 			} else {
 				System.err.println("Unknown option: " + args[1] + quit);
+				return;
 			}
 		}
 

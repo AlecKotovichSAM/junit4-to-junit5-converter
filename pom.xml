@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.aleck</groupId>
 	<artifactId>junit4-to-junit5-converter</artifactId>
-	<version>0.1.5</version>
+	<version>0.1.6</version>
 
 	<properties>
 		<maven.compiler.source>11</maven.compiler.source>
