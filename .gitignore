@@ -1,2 +1,4 @@
 /target/
 /run.bat
+/dependency-reduced-pom.xml
+/README.template.md

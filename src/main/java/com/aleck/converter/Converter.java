@@ -128,7 +128,7 @@ public class Converter implements Consumer<String> {
         log.info("Total occurences: " + occurences);
         log.info("Total files analyzed:" + files.size());
         Duration between = Duration.between(startTime, LocalTime.now());
-		log.info("Total execution time: " + DateTimeFormatter.ISO_LOCAL_TIME.format(LocalTime.ofSecondOfDay(between.toSeconds())));
+		log.info("Finished in " + DateTimeFormatter.ISO_LOCAL_TIME.format(LocalTime.ofSecondOfDay(between.toSeconds())));
 
     }
 
